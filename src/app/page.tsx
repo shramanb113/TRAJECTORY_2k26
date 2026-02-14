@@ -9,7 +9,7 @@ export default function Home() {
       <Hero />
       <MarqueeSection />
       <PortalSection />
-      <EventTimelineSection />
+      
       {/* Spacer for smooth transition */}
       <div className="h-40 w-full bg-black"></div>
       <footer className="w-full py-20 bg-black text-center text-white">
