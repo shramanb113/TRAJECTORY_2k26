@@ -33,7 +33,7 @@ const MarqueeRow = ({
   return (
     <div className={`flex overflow-hidden whitespace-nowrap ${className}`}>
       <motion.div
-        className="flex gap-10 py-2"
+        className="flex gap-6 md:gap-10 py-2"
         animate={{
           x: direction === "left" ? "-50%" : "0%",
         }}
@@ -49,14 +49,14 @@ const MarqueeRow = ({
         {items.map((item, index) => (
           <span
             key={index}
-            className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[var(--color-primary)] opacity-20"
+            className="text-2xl md:text-6xl font-black uppercase tracking-tighter text-[var(--color-primary)] opacity-20"
           >
             {item}
           </span>
         ))}
       </motion.div>
       <motion.div
-        className="flex gap-10 py-2"
+        className="flex gap-6 md:gap-10 py-2"
         animate={{
           x: direction === "left" ? "-50%" : "0%",
         }}
@@ -72,7 +72,7 @@ const MarqueeRow = ({
         {items.map((item, index) => (
           <span
             key={`dup-${index}`}
-            className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[var(--color-primary)] opacity-20"
+            className="text-2xl md:text-6xl font-black uppercase tracking-tighter text-[var(--color-primary)] opacity-20"
           >
             {item}
           </span>
@@ -86,6 +86,16 @@ const MarqueeSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Initialize spotlight to center for mobile/initial load
+  useEffect(() => {
+    const handleResize = () => {
+      setMousePosition({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
@@ -96,26 +106,37 @@ const MarqueeSection = () => {
     }
   };
 
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (containerRef.current && e.touches[0]) {
+      const rect = containerRef.current.getBoundingClientRect();
+      setMousePosition({
+        x: e.touches[0].clientX - rect.left,
+        y: e.touches[0].clientY - rect.top,
+      });
+    }
+  };
+
   return (
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full min-h-screen bg-black flex flex-col justify-center overflow-hidden cursor-none"
+      onTouchMove={handleTouchMove}
+      className="relative w-full min-h-screen bg-black flex flex-col justify-center overflow-hidden md:cursor-none"
     >
       {/* Background Marquees (Dim/Hidden) */}
-      <div className="absolute inset-0 flex flex-col justify-center gap-6 opacity-20 pointer-events-none">
+      <div className="absolute inset-0 flex flex-col justify-center gap-4 md:gap-6 opacity-30 pointer-events-none">
         <MarqueeRow items={marqueeItems} direction="left" speed={40} />
         <MarqueeRow items={marqueeItems} direction="right" speed={30} />
         <MarqueeRow items={marqueeItems} direction="left" speed={35} />
         <MarqueeRow items={marqueeItems} direction="right" speed={25} />
       </div>
 
-      {/* Spotlight Logic: We render the SAME content but masked heavily */}
+      {/* Spotlight Logic */}
       <div
-        className="absolute inset-0 flex flex-col justify-center gap-6 pointer-events-none"
+        className="absolute inset-0 flex flex-col justify-center gap-4 md:gap-6 pointer-events-none"
         style={{
-          maskImage: `radial-gradient(circle 200px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
-          WebkitMaskImage: `radial-gradient(circle 200px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
+          maskImage: `radial-gradient(circle ${typeof window !== 'undefined' && window.innerWidth < 768 ? '150px' : '250px'} at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
+          WebkitMaskImage: `radial-gradient(circle ${typeof window !== 'undefined' && window.innerWidth < 768 ? '150px' : '250px'} at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
         }}
       >
         <MarqueeRow

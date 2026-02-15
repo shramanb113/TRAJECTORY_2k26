@@ -91,7 +91,7 @@ const PortalSection = () => {
         </div>
 
         <Canvas
-          camera={{ position: [0, 0, 6], fov: 50 }}
+          camera={{ position: [0, 0, 6], fov: typeof window !== 'undefined' && window.innerWidth < 768 ? 75 : 50 }}
           gl={{ antialias: true, alpha: true }}
           className="relative z-10 pointer-events-none"
         >
@@ -106,7 +106,7 @@ const PortalSection = () => {
         </Canvas>
 
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
-          <h2 className="text-primary text-5xl md:text-8xl font-black uppercase italic tracking-tighter opacity-10 mix-blend-overlay"></h2>
+          <h2 className="text-primary text-4xl md:text-8xl font-black uppercase italic tracking-tighter opacity-10 mix-blend-overlay"></h2>
         </div>
       </div>
     </section>

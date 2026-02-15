@@ -28,19 +28,19 @@ const EventTimelineSection = () => {
 
   return (
     <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none overflow-hidden">
-      <div className="container mx-auto px-4 mt-[15vh]">
-        <div className="text-center mb-12 timeline-heading">
-          <h2 className="text-6xl md:text-8xl font-black text-white uppercase tracking-tighter filter drop-shadow-[0_0_20px_rgba(0,255,255,0.8)]">
+      <div className="container mx-auto px-4 mt-20 md:mt-[15vh]">
+        <div className="text-center mb-8 md:mb-12 timeline-heading">
+          <h2 className="text-4xl md:text-8xl font-black text-white uppercase tracking-tighter filter drop-shadow-[0_0_20px_rgba(0,255,255,0.8)]">
             Event Timeline
           </h2>
-          <div className="h-1 w-32 bg-primary mx-auto mt-4 rounded-full shadow-[0_0_15px_rgba(0,255,255,1)]" />
+          <div className="h-1 w-20 md:w-32 bg-primary mx-auto mt-4 rounded-full shadow-[0_0_15px_rgba(0,255,255,1)]" />
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto px-2 md:px-0">
           {events.map((item, index) => (
             <div 
               key={index} 
-              className="timeline-card opacity-0 translate-y-20 bg-black/40 backdrop-blur-xl p-8 rounded-2xl border border-white/10 hover:border-primary/50 transition-all duration-500 group relative overflow-hidden"
+              className="timeline-card opacity-0 translate-y-20 bg-black/40 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-white/10 hover:border-primary/50 transition-all duration-500 group relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary to-transparent opacity-30" />
               

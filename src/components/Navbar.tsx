@@ -32,25 +32,25 @@ const Navbar = () => {
       initial="hidden"
       animate="visible"
       variants={navVariants}
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-transparent backdrop-blur-sm"
+      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-6 py-3 md:py-4 bg-transparent backdrop-blur-sm"
     >
       <div className="flex items-center">
         <Link href="/">
           <Image
             src="/logo.webp"
             alt="Trajectory Logo"
-            width={80}
-            height={80}
-            className="w-20 h-20 object-contain"
+            width={60}
+            height={60}
+            className="w-12 h-12 md:w-20 md:h-20 object-contain"
           />
         </Link>
       </div>
 
-      <div className="flex items-center gap-8">
+      <div className="flex items-center gap-4 md:gap-8">
         <motion.div variants={itemVariants}>
           <Link
             href="#explore"
-            className="text-lg font-medium text-[var(--color-accent)] hover:text-[var(--color-primary)] transition-colors duration-300"
+            className="text-sm md:text-lg font-medium text-[var(--color-accent)] hover:text-[var(--color-primary)] transition-colors duration-300"
           >
             Explore
           </Link>
@@ -58,7 +58,7 @@ const Navbar = () => {
         <motion.div variants={itemVariants}>
           <Link
             href="#about"
-            className="text-lg font-medium text-[var(--color-accent)] hover:text-[var(--color-primary)] transition-colors duration-300"
+            className="text-sm md:text-lg font-medium text-[var(--color-accent)] hover:text-[var(--color-primary)] transition-colors duration-300"
           >
             About
           </Link>
@@ -66,7 +66,7 @@ const Navbar = () => {
         <motion.div variants={itemVariants}>
           <Link
             href="/login"
-            className="px-6 py-2 text-lg font-bold text-[var(--color-base)] bg-[var(--color-primary)] rounded-full hover:bg-[var(--color-secondary)] hover:text-[var(--color-accent)] transition-all duration-300 shadow-[0_0_10px_var(--color-primary)] hover:shadow-[0_0_20px_var(--color-secondary)]"
+            className="px-4 md:px-6 py-1.5 md:py-2 text-sm md:text-lg font-bold text-[var(--color-base)] bg-[var(--color-primary)] rounded-full hover:bg-[var(--color-secondary)] hover:text-[var(--color-accent)] transition-all duration-300 shadow-[0_0_10px_var(--color-primary)] hover:shadow-[0_0_20px_var(--color-secondary)]"
           >
             Login
           </Link>
