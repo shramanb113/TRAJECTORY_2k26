@@ -60,7 +60,7 @@ const Hero = () => {
 
         <motion.p
           variants={itemVariants}
-          className="text-lg md:text-2xl font-light text-accent max-w-2xl mx-auto mb-8 md:mb-10 tracking-wide px-4"
+          className="text-lg md:text-2xl font-light text-white/90 max-w-2xl mx-auto mb-8 md:mb-10 tracking-wide px-4"
         >
           The Future is Realigned. <br className="hidden md:block" />
           Experience the mechanical revolution.
@@ -72,13 +72,13 @@ const Hero = () => {
         >
           <Link
             href="#explore"
-            className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 text-lg md:text-xl font-bold text-base bg-primary rounded-none hover:bg-secondary hover:text-accent transition-all duration-300 shadow-[0_0_20px_var(--color-primary)] hover:shadow-[0_0_30px_var(--color-secondary)] uppercase tracking-wider clip-path-polygon"
+            className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 text-lg md:text-xl font-bold text-vanta bg-primary rounded-none hover:bg-secondary hover:text-accent transition-all duration-300 shadow-[0_0_20px_var(--color-primary)] hover:shadow-[0_0_30px_var(--color-secondary)] uppercase tracking-wider clip-path-polygon"
           >
             Explore Events
           </Link>
           <Link
             href="/login"
-            className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 text-lg md:text-xl font-bold text-primary border-2 border-primary bg-transparent rounded-none hover:bg-primary hover:text-base transition-all duration-300 uppercase tracking-wider"
+            className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 text-lg md:text-xl font-bold text-primary border-2 border-primary bg-transparent rounded-none hover:bg-primary hover:text-vanta transition-all duration-300 uppercase tracking-wider"
           >
             Join the Resistance
           </Link>

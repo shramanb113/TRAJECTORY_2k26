@@ -30,11 +30,11 @@ const Footer = () => {
 
               <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
                 <div className="text-center md:text-left">
-                  <span className="text-primary font-mono text-[10px] tracking-[0.5em] uppercase mb-2 block opacity-60">System Access</span>
+                  <span className="text-primary font-mono text-[10px] tracking-[0.5em] uppercase mb-2 block opacity-80">System Access</span>
                   <h3 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter group-hover:text-primary transition-colors duration-500">
                     Join The Revolution
                   </h3>
-                  <p className="text-gray-500 font-mono text-xs mt-2 uppercase tracking-widest">Connect via Linktree</p>
+                  <p className="text-white/60 font-mono text-xs mt-2 uppercase tracking-widest">Connect via Linktree</p>
                 </div>
                 <div className="p-4 bg-primary/10 border border-primary/20 rounded-full group-hover:scale-125 group-hover:bg-primary transition-all duration-700">
                   <ExternalLink className="w-8 h-8 text-primary group-hover:text-black transition-colors" />
@@ -55,7 +55,7 @@ const Footer = () => {
                 target="_blank"
                 className="group relative p-4 border border-white/5 bg-[#050505] hover:border-primary/40 transition-all duration-500"
               >
-                <Instagram className="w-6 h-6 text-white/40 group-hover:text-primary transition-colors duration-300" />
+                <Instagram className="w-6 h-6 text-white/70 group-hover:text-primary transition-colors duration-300" />
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-primary/5 blur-sm" />
               </Link>
               
@@ -64,7 +64,7 @@ const Footer = () => {
                 target="_blank"
                 className="group relative p-4 border border-white/5 bg-[#050505] hover:border-primary/40 transition-all duration-500"
               >
-                <Linkedin className="w-6 h-6 text-white/40 group-hover:text-primary transition-colors duration-300" />
+                <Linkedin className="w-6 h-6 text-white/70 group-hover:text-primary transition-colors duration-300" />
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-primary/5 blur-sm" />
               </Link>
 
@@ -73,18 +73,18 @@ const Footer = () => {
                 target="_blank"
                 className="group relative p-4 border border-white/5 bg-[#050505] hover:border-primary/40 transition-all duration-500"
               >
-                <Facebook className="w-6 h-6 text-white/40 group-hover:text-primary transition-colors duration-300" />
+                <Facebook className="w-6 h-6 text-white/70 group-hover:text-primary transition-colors duration-300" />
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-primary/5 blur-sm" />
               </Link>
             </div>
 
             <div className="flex flex-col items-center gap-2">
               <div className="flex items-center gap-4">
-                 <div className="w-20 h-px bg-white/5" />
-                 <span className="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em]">Trajectory_2k26</span>
-                 <div className="w-20 h-px bg-white/5" />
+                 <div className="w-20 h-px bg-white/10" />
+                 <span className="text-[10px] font-mono text-white/80 uppercase tracking-[0.3em]">Trajectory_2k26</span>
+                 <div className="w-20 h-px bg-white/10" />
               </div>
-              <p className="text-[10px] font-mono text-white/10 uppercase tracking-widest mt-4">
+              <p className="text-[10px] font-mono text-white/70 uppercase tracking-widest mt-4">
                 © 2026 Trajectory. All rights reserved.
               </p>
             </div>

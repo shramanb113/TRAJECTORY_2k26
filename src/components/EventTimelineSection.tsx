@@ -128,21 +128,26 @@ const EventTimelineSection = () => {
 
                 {/* Content Block */}
                 <div className={`w-full md:w-[45%] ml-12 md:ml-0 group`}>
-                   <div className="relative bg-[#0a0a0a] border border-white/5 p-8 rounded-2xl hover:border-primary/40 transition-all duration-500 hover:shadow-[0_0_40px_rgba(230,81,0,0.05)]">
+                   <div className="relative bg-[#0a0a0a] border border-white/5 p-8 rounded-2xl hover:border-primary/40 transition-all duration-500 hover:shadow-[0_0_40px_rgba(230,81,0,0.05)] overflow-hidden">
+                      {/* Decorative Background Number */}
+                      <div className="absolute -right-4 -bottom-8 text-[10rem] font-black text-primary/5 group-hover:text-primary/10 transition-colors duration-500 select-none pointer-events-none">
+                        {i + 1}
+                      </div>
+
                       {/* Scanning Line Overlay */}
                       <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-10 transition-opacity rounded-2xl overflow-hidden">
                         <div className="w-full h-[2px] bg-primary absolute top-0 animate-[scan_4s_linear_infinite]" />
                       </div>
 
-                      <div className="flex flex-col gap-4">
+                      <div className="flex flex-col gap-4 relative z-10">
                         <div className="flex justify-between items-center">
                           <span className="text-primary font-mono text-xs tracking-widest uppercase">{event.day}</span>
-                          <span className="text-white/20 font-mono text-[10px]">{event.date}</span>
+                          <span className="text-white font-mono text-[10px]">{event.date}</span>
                         </div>
                         <h3 className="text-2xl md:text-3xl font-black text-white uppercase group-hover:text-primary transition-colors duration-300">
                           {event.title}
                         </h3>
-                        <p className="text-gray-400 text-sm md:text-base leading-relaxed font-light">
+                        <p className="text-white text-sm md:text-base leading-relaxed font-light">
                           {event.desc}
                         </p>
                       </div>

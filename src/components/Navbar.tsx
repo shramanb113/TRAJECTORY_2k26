@@ -66,7 +66,7 @@ const Navbar = () => {
         <motion.div variants={itemVariants}>
           <Link
             href="/login"
-            className="px-4 md:px-6 py-1.5 md:py-2 text-sm md:text-lg font-bold text-[var(--color-base)] bg-[var(--color-primary)] rounded-full hover:bg-[var(--color-secondary)] hover:text-[var(--color-accent)] transition-all duration-300 shadow-[0_0_10px_var(--color-primary)] hover:shadow-[0_0_20px_var(--color-secondary)]"
+            className="px-4 md:px-6 py-1.5 md:py-2 text-sm md:text-lg font-bold text-[var(--color-vanta)] bg-[var(--color-primary)] rounded-full hover:bg-[var(--color-secondary)] hover:text-[var(--color-accent)] transition-all duration-300 shadow-[0_0_10px_var(--color-primary)] hover:shadow-[0_0_20px_var(--color-secondary)]"
           >
             Login
           </Link>

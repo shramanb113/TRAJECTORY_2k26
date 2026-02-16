@@ -53,7 +53,7 @@ const FeaturedEvents = () => {
   ];
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-20 pb-[80vh]">
+    <div className="w-full max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-20">
       <div className="text-center mb-16 md:mb-32 featured-heading">
         <h2 className="text-4xl md:text-9xl font-black text-white uppercase tracking-[0.1em] md:tracking-[0.15em] mb-4 md:mb-6 filter drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
           Core <span className="text-primary italic">Events</span>
@@ -71,7 +71,7 @@ const FeaturedEvents = () => {
         {events.map((event, index) => (
           <div 
             key={index}
-            className="featured-card group relative h-[450px] md:h-[500px] bg-black border border-white/5 rounded-none overflow-hidden transition-all duration-700 hover:border-primary/50"
+            className="featured-card group relative h-[450px] md:h-[500px] bg-black border border-white/5 rounded-none overflow-hidden transition-[border-color,box-shadow] duration-500 hover:border-primary/50"
           >
             {/* Top Bar Decoration */}
             <div className="absolute top-0 left-0 w-full h-1 bg-white/5 group-hover:bg-primary/30" />
@@ -120,7 +120,7 @@ const FeaturedEvents = () => {
                       className="w-20 h-20 md:w-24 md:h-24 border border-white/10 flex items-center justify-center relative backdrop-blur-sm"
                       style={{ boxShadow: `inset 0 0 40px ${event.color}11` }}
                     >
-                      <div className="text-[8px] md:text-[10px] font-mono text-white/40 tracking-[0.2em]">{event.id}</div>
+                      <div className="text-[8px] md:text-[10px] font-mono text-white/70 tracking-[0.2em]">{event.id}</div>
                       {/* Corner Accents */}
                       <div className="absolute -top-1 -left-1 w-2 h-2 border-l border-t border-primary" />
                       <div className="absolute -bottom-1 -right-1 w-2 h-2 border-r border-b border-primary" />
@@ -130,7 +130,7 @@ const FeaturedEvents = () => {
                  </div>
               </div>
             </div>
-
+ 
             {/* Info Section */}
             <div className="p-6 md:p-10 flex flex-col h-3/5 md:h-1/2 justify-between relative bg-black">
               <div>
@@ -143,7 +143,7 @@ const FeaturedEvents = () => {
                 <h3 className="text-xl md:text-3xl font-black text-white mb-4 md:mb-6 uppercase tracking-tight group-hover:translate-x-2 transition-transform duration-500">
                   {event.title}
                 </h3>
-                <p className="text-gray-500 text-xs md:text-sm leading-relaxed font-light group-hover:text-gray-300 transition-colors duration-500 line-clamp-3">
+                <p className="text-white text-xs md:text-sm leading-relaxed font-normal group-hover:text-primary transition-colors duration-500 line-clamp-3">
                   {event.desc}
                 </p>
               </div>
