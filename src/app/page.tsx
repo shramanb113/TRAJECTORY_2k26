@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import MarqueeSection from "@/components/MarqueeSection";
 import EventTimelineSection from "@/components/EventTimelineSection";
 import CyberneticLensSection from "@/components/CyberneticLensSection";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -14,8 +15,8 @@ export default function Home() {
       {/* New Mechanical Lens & Featured Events Transition */}
       <CyberneticLensSection />
 
-      {/* Spacer for smooth transition */}
-      <div className="h-40 w-full bg-black"></div>
+      {/* Final Footer Section */}
+      <Footer />
     </main>
   );
 }
