@@ -1,23 +1,16 @@
 "use client";
 
 import { useRef } from "react";
-import * as THREE from "three";
-import { Canvas } from "@react-three/fiber";
-import { Environment, Float } from "@react-three/drei";
-import { EffectComposer, Bloom, ChromaticAberration, Vignette } from "@react-three/postprocessing";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import CyberneticLens from "./CyberneticLens";
 import FeaturedEvents from "./FeaturedEvents";
-import RoboticTunnel from "./RoboticTunnel";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const CyberneticLensSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -30,116 +23,93 @@ const CyberneticLensSection = () => {
         scrollTrigger: {
           trigger: triggerRef.current,
           start: "top top",
-          end: isMobile ? "+=1800%" : "+=1000%", // Significantly longer on mobile for full card reveal
+          end: isMobile ? "+=1800%" : "+=1000%",
           scrub: 1,
           pin: true,
-          onUpdate: (self: any) => {
-            progressRef.current = self.progress;
-          },
         },
       });
 
-      // 1. Initial State - Pre-reveal
+      // 1. Initial State
       gsap.set(contentRef.current, { 
         opacity: 0, 
-        scale: 0.8, 
-        filter: "blur(20px)",
-        y: isMobile ? "20vh" : "40vh" 
+        y: isMobile ? "20vh" : "30vh" 
       });
 
-      // 2. Open Iris & Reveal Content early
+      // 2. Reveal Content
       tl.to(contentRef.current, {
         opacity: 1,
-        scale: 1,
-        filter: "blur(0px)",
         y: "5vh",
-        duration: 0.25,
+        duration: 0.2,
         ease: "power2.out",
       }, 0.05);
 
-      // 3. Deep Vertical Scroll
+      // 3. Deep Vertical Scroll for Cards
       tl.to(contentRef.current, {
-        y: isMobile ? "-900vh" : "-220vh", // Even deeper to ensure all 6 cards are fully visible on small screens
-        duration: 0.75, // Slightly longer duration for the deeper move
+        y: isMobile ? "-900vh" : "-220vh",
+        duration: 0.8,
         ease: "none",
-      }, 0.25);
+      }, 0.2);
 
-      // 4. Staggered reveal of cards with Side-to-Side entry
+      // 4. Clean Staggered Reveal of cards
       const cards = gsap.utils.toArray(".featured-card");
       cards.forEach((card: any, i) => {
-        const isLeft = i % 2 === 0;
-        const offsetX = isMobile ? 40 : 150; 
-        
         gsap.set(card, { 
           opacity: 0, 
-          scale: 0.8, 
-          x: isLeft ? -offsetX : offsetX,
-          y: isMobile ? 20 : 40
+          y: 60,
+          scale: 0.95 
         });
 
         tl.to(card, {
           opacity: 1,
-          scale: 1,
-          x: 0,
           y: 0,
-          duration: 0.2, // Faster entry
-          ease: "back.out(1.2)"
-        }, 0.12 + (i * 0.06)); // Faster stagger
+          scale: 1,
+          duration: 0.25,
+          ease: "power3.out"
+        }, 0.15 + (i * 0.08));
       });
     },
     { scope: containerRef },
   );
 
   return (
-    <section ref={containerRef} className="relative z-30 bg-black overflow-hidden">
+    <section ref={containerRef} className="relative z-30 bg-black overflow-hidden border-t border-white/5">
       <div
         ref={triggerRef}
         className="h-screen w-full relative"
       >
-        {/* Featured Events now on top for guaranteed visibility and interaction - Z-25 */}
+        {/* Simple Technical Background */}
+        <div className="absolute inset-0 pointer-events-none opacity-20">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(230,81,0,0.05)_0%,transparent_70%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
+        </div>
+
+        {/* Featured Events Layer */}
         <div 
           ref={contentRef}
           className="absolute inset-0 flex flex-col items-center justify-start pt-10 md:pt-20 px-4 z-25 pointer-events-none"
         >
-          {/* Re-enable events once they start appearing */}
-          <div className="pointer-events-auto w-full">
+          <div className="pointer-events-auto w-full max-w-7xl">
              <FeaturedEvents />
           </div>
         </div>
 
-        {/* The 3D Lens (Behind the content once we 'enter') - Z-20 */}
-        <div className="absolute inset-0 z-20 pointer-events-none">
-          <Canvas
-            camera={{ 
-              position: [0, 0, 10], 
-              fov: typeof window !== 'undefined' && window.innerWidth < 768 ? 75 : 45 
-            }}
-            gl={{ antialias: true, alpha: true }}
-          >
-            <ambientLight intensity={0.2} />
-            <pointLight position={[5, 5, 5]} intensity={2} color="#00ffff" />
-            
-            <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-              <CyberneticLens scrollProgress={progressRef} />
-            </Float>
-
-            <RoboticTunnel progress={progressRef} />
-
-            <Environment preset="city" />
-
-            <EffectComposer multisampling={4}>
-              <Bloom intensity={1.5} luminanceThreshold={0.1} />
-              <ChromaticAberration offset={new THREE.Vector2(0.005, 0.005)} />
-              <Vignette darkness={1.2} />
-            </EffectComposer>
-          </Canvas>
-        </div>
-
-        {/* Scanlines & HUD Overlay - Z-30 */}
-        <div className="absolute inset-0 pointer-events-none z-30 opacity-20">
-           <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,255,255,0.25)_50%)] bg-[length:100%_2px]" />
-           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)]" />
-           <div className="absolute top-6 left-6 md:top-10 md:left-10 text-[8px] md:text-[10px] font-mono text-primary animate-pulse">SYSTEM_SCAN: ACTIVE</div>
+        {/* Minimal HUD Overlays */}
+        <div className="absolute inset-0 pointer-events-none z-30 opacity-30 px-6 py-8">
+           <div className="flex justify-between items-start text-[8px] font-mono text-primary/60">
+             <div className="flex flex-col gap-1">
+               <span>SYS_MODE: STABLE</span>
+               <span className="animate-pulse">SIGNAL_LOCK: 100%</span>
+             </div>
+             <div className="text-right">
+               <span>LATENCY: 12ms</span>
+               <span>FPS: 60.0</span>
+             </div>
+           </div>
+           
+           <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+             <div className="w-px h-12 bg-linear-to-b from-primary/0 via-primary/50 to-primary/0" />
+             <span className="text-[10px] font-mono text-primary/40 tracking-[0.3em] uppercase">Scroll to explore</span>
+           </div>
         </div>
       </div>
     </section>

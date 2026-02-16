@@ -1,8 +1,16 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const EventTimelineSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+
   const events = [
     {
       day: "Day 1",
@@ -30,56 +38,131 @@ const EventTimelineSection = () => {
     },
   ];
 
+  useGSAP(
+    () => {
+      if (!containerRef.current || !lineRef.current) return;
+
+      // 1. Progress Line Animation
+      gsap.to(lineRef.current, {
+        height: "100%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 20%",
+          end: "bottom 80%",
+          scrub: 1,
+        },
+      });
+
+      // 2. Individual Item Animations
+      const cards = gsap.utils.toArray(".timeline-item");
+      cards.forEach((card: any, i) => {
+        const isEven = i % 2 === 0;
+        
+        gsap.from(card, {
+          x: isEven ? -100 : 100,
+          opacity: 0,
+          scale: 0.8,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            end: "top 60%",
+            scrub: 1,
+          },
+        });
+
+        // Small indicator circle animation
+        gsap.from(card.querySelector(".dot"), {
+          scale: 0,
+          opacity: 0,
+          duration: 0.5,
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section className="relative w-full py-20 bg-black overflow-hidden">
-      <div className="container mx-auto px-4">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12 md:mb-20"
-        >
+    <section ref={containerRef} className="relative w-full py-32 bg-black overflow-hidden border-t border-white/5">
+      <div className="container mx-auto px-4 relative">
+        
+        {/* Header */}
+        <div className="text-center mb-24 md:mb-40">
           <h2 className="text-4xl md:text-8xl font-black text-white uppercase tracking-tighter filter drop-shadow-[0_0_20px_rgba(230,81,0,0.5)]">
             Event Timeline
           </h2>
-          <div className="h-1.5 w-24 md:w-40 bg-[var(--color-primary)] mx-auto mt-6 rounded-full shadow-[0_0_20px_var(--color-primary)]" />
-        </motion.div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
-          {events.map((item, index) => (
-            <motion.div 
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative bg-[#0a0a0a] border border-white/5 p-8 rounded-2xl hover:border-[var(--color-primary)]/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(230,81,0,0.1)]"
-            >
-              {/* Robotic Accent Line */}
-              <div className="absolute top-0 left-0 w-0 h-1 bg-[var(--color-primary)] group-hover:w-full transition-all duration-700 ease-out" />
-              
-              <div className="flex flex-col h-full relative z-10">
-                <span className="text-[var(--color-primary)] font-mono text-xs tracking-widest uppercase mb-2">
-                  {item.day}
-                </span>
-                <span className="text-gray-600 font-mono text-[10px] mb-6">
-                  {item.date}
-                </span>
-                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[var(--color-primary)] transition-colors duration-300">
-                  {item.title}
-                </h3>
-                <p className="text-gray-400 text-sm leading-relaxed font-light">
-                  {item.desc}
-                </p>
-              </div>
+          <p className="text-primary font-mono text-sm mt-4 tracking-[0.3em] uppercase opacity-60">The Realignment Sequence</p>
+        </div>
 
-              {/* Background Decorative Element */}
-              <div className="absolute bottom-4 right-4 text-white/5 font-mono text-6xl font-black pointer-events-none group-hover:text-[var(--color-primary)]/10 transition-colors duration-500">
-                0{index + 1}
+        {/* Central Vertical Line Container */}
+        <div className="absolute left-1/2 -translate-x-1/2 top-60 md:top-80 bottom-20 w-[2px] bg-white/5 z-0 hidden md:block">
+           <div ref={lineRef} className="absolute top-0 left-0 w-full h-0 bg-primary shadow-[0_0_15px_var(--color-primary)]" />
+        </div>
+
+        {/* Mobile Left-Aligned Line */}
+        <div className="absolute left-8 top-60 bottom-20 w-[2px] bg-white/5 z-0 md:hidden">
+           <div className="absolute top-0 left-0 w-full h-full bg-linear-to-b from-primary via-primary/50 to-transparent" />
+        </div>
+
+        {/* Timeline Items */}
+        <div className="relative max-w-6xl mx-auto flex flex-col gap-24 md:gap-40">
+          {events.map((event, i) => {
+            const isEven = i % 2 === 0;
+            return (
+              <div 
+                key={i} 
+                className={`timeline-item flex items-center justify-center md:justify-between w-full relative ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+              >
+                {/* Visual Dot on the line */}
+                <div className="dot absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border-2 border-primary bg-black z-10 hidden md:block shadow-[0_0_10px_var(--color-primary)]" />
+                
+                {/* Mobile Dot */}
+                <div className="absolute left-4 w-4 h-4 rounded-full border-2 border-primary bg-black z-10 md:hidden shadow-[0_0_10px_var(--color-primary)]" />
+
+                {/* Content Block */}
+                <div className={`w-full md:w-[45%] ml-12 md:ml-0 group`}>
+                   <div className="relative bg-[#0a0a0a] border border-white/5 p-8 rounded-2xl hover:border-primary/40 transition-all duration-500 hover:shadow-[0_0_40px_rgba(230,81,0,0.05)]">
+                      {/* Scanning Line Overlay */}
+                      <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-10 transition-opacity rounded-2xl overflow-hidden">
+                        <div className="w-full h-[2px] bg-primary absolute top-0 animate-[scan_4s_linear_infinite]" />
+                      </div>
+
+                      <div className="flex flex-col gap-4">
+                        <div className="flex justify-between items-center">
+                          <span className="text-primary font-mono text-xs tracking-widest uppercase">{event.day}</span>
+                          <span className="text-white/20 font-mono text-[10px]">{event.date}</span>
+                        </div>
+                        <h3 className="text-2xl md:text-3xl font-black text-white uppercase group-hover:text-primary transition-colors duration-300">
+                          {event.title}
+                        </h3>
+                        <p className="text-gray-400 text-sm md:text-base leading-relaxed font-light">
+                          {event.desc}
+                        </p>
+                      </div>
+
+                      {/* Accent Corner */}
+                      <div className={`absolute top-0 ${isEven ? 'right-0' : 'left-0'} w-12 h-12 border-t-2 border-${isEven ? 'r' : 'l'}-2 border-primary/20 group-hover:border-primary/60 transition-colors duration-500 rounded-${isEven ? 'tr' : 'tl'}-2xl`} />
+                   </div>
+                </div>
+
+                {/* Empty Spacer for Desktop Layout */}
+                <div className="hidden md:block w-[45%]" />
               </div>
-            </motion.div>
-          ))}
+            );
+          })}
+        </div>
+
+        {/* HUD Elements */}
+        <div className="mt-40 text-center flex flex-col items-center gap-4 opacity-30">
+           <div className="w-[1px] h-20 bg-linear-to-b from-primary/50 to-transparent" />
+           <span className="text-[10px] font-mono text-primary tracking-[0.5em] uppercase">End of Sequence</span>
         </div>
       </div>
     </section>

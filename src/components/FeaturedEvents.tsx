@@ -88,6 +88,20 @@ const FeaturedEvents = () => {
                  alt={event.title}
                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 grayscale group-hover:grayscale-0"
                />
+               
+               {/* Technical Scanline Animation */}
+               <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+                 <div className="w-full h-[2px] bg-primary/20 absolute top-0 animate-[scan_3s_linear_infinite]" 
+                   style={{ boxShadow: '0 0 10px var(--color-primary)' }} 
+                 />
+                 <div className="w-full h-full opacity-10" 
+                   style={{ 
+                     backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(230,81,0,0.1) 1px, rgba(230,81,0,0.1) 2px)',
+                     backgroundSize: '100% 4px'
+                   }}
+                 />
+               </div>
+
                <div 
                 className="absolute inset-0 opacity-10 group-hover:opacity-30 transition-opacity duration-1000" 
                 style={{ 
@@ -144,7 +158,7 @@ const FeaturedEvents = () => {
               </div>
             </div>
 
-            {/* Robotic Scan Overlay */}
+            {/* Hidden Scroll Transition Trigger overlay */}
             <div className="absolute top-0 left-[-100%] w-full h-full bg-linear-to-r from-transparent via-white/[0.05] to-transparent group-hover:left-[100%] transition-all duration-1000 pointer-events-none" />
           </div>
         ))}
