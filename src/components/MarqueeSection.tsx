@@ -24,11 +24,13 @@ const MarqueeRow = ({
   direction = "left",
   speed = 20,
   className = "",
+  itemClassName = "",
 }: {
   items: string[];
   direction?: "left" | "right";
   speed?: number;
   className?: string;
+  itemClassName?: string;
 }) => {
   return (
     <div className={`flex overflow-hidden whitespace-nowrap ${className}`}>
@@ -49,7 +51,7 @@ const MarqueeRow = ({
         {items.map((item, index) => (
           <span
             key={index}
-            className="text-2xl md:text-6xl font-black uppercase tracking-tighter text-[var(--color-primary)] opacity-20"
+            className={`text-2xl md:text-6xl font-black uppercase tracking-tighter ${itemClassName}`}
           >
             {item}
           </span>
@@ -72,7 +74,7 @@ const MarqueeRow = ({
         {items.map((item, index) => (
           <span
             key={`dup-${index}`}
-            className="text-2xl md:text-6xl font-black uppercase tracking-tighter text-[var(--color-primary)] opacity-20"
+            className={`text-2xl md:text-6xl font-black uppercase tracking-tighter ${itemClassName}`}
           >
             {item}
           </span>
@@ -83,87 +85,41 @@ const MarqueeRow = ({
 };
 
 const MarqueeSection = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Initialize spotlight to center for mobile/initial load
-  useEffect(() => {
-    const handleResize = () => {
-      setMousePosition({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      setMousePosition({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      });
-    }
-  };
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (containerRef.current && e.touches[0]) {
-      const rect = containerRef.current.getBoundingClientRect();
-      setMousePosition({
-        x: e.touches[0].clientX - rect.left,
-        y: e.touches[0].clientY - rect.top,
-      });
-    }
-  };
+  const mainItemClass = "text-[var(--color-accent)] drop-shadow-[0_0_10px_var(--color-primary)] opacity-100";
+  const bgItemClass = "text-[var(--color-primary)] opacity-45";
 
   return (
     <section
       ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onTouchMove={handleTouchMove}
-      className="relative w-full min-h-screen bg-black flex flex-col justify-center overflow-hidden md:cursor-none"
+      className="relative w-full py-20 md:py-32 bg-black flex flex-col justify-center overflow-hidden"
     >
-      {/* Background Marquees (Dim/Hidden) */}
-      <div className="absolute inset-0 flex flex-col justify-center gap-4 md:gap-6 opacity-30 pointer-events-none">
-        <MarqueeRow items={marqueeItems} direction="left" speed={40} />
-        <MarqueeRow items={marqueeItems} direction="right" speed={30} />
-        <MarqueeRow items={marqueeItems} direction="left" speed={35} />
-        <MarqueeRow items={marqueeItems} direction="right" speed={25} />
+      {/* Robotic Scanline Overlay */}
+      <div className="absolute inset-0 pointer-events-none z-10 opacity-10 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%]" />
+
+      <div className="relative flex flex-col justify-center gap-4 md:gap-8">
+        <MarqueeRow items={marqueeItems} direction="left" speed={40} itemClassName={mainItemClass} />
+        <MarqueeRow 
+          items={marqueeItems} 
+          direction="right" 
+          speed={30} 
+          className="scale-95" 
+          itemClassName={bgItemClass}
+        />
+        <MarqueeRow items={marqueeItems} direction="left" speed={35} itemClassName={mainItemClass} />
+        <MarqueeRow 
+          items={marqueeItems} 
+          direction="right" 
+          speed={25} 
+          className="scale-90"
+          itemClassName={bgItemClass}
+        />
       </div>
 
-      {/* Spotlight Logic */}
-      <div
-        className="absolute inset-0 flex flex-col justify-center gap-4 md:gap-6 pointer-events-none"
-        style={{
-          maskImage: `radial-gradient(circle ${typeof window !== 'undefined' && window.innerWidth < 768 ? '150px' : '250px'} at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
-          WebkitMaskImage: `radial-gradient(circle ${typeof window !== 'undefined' && window.innerWidth < 768 ? '150px' : '250px'} at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
-        }}
-      >
-        <MarqueeRow
-          items={marqueeItems}
-          direction="left"
-          speed={40}
-          className="[&>div>span]:opacity-100 [&>div>span]:text-[var(--color-accent)] [&>div>span]:drop-shadow-[0_0_10px_var(--color-primary)]"
-        />
-        <MarqueeRow
-          items={marqueeItems}
-          direction="right"
-          speed={30}
-          className="[&>div>span]:opacity-100 [&>div>span]:text-[var(--color-accent)] [&>div>span]:drop-shadow-[0_0_10px_var(--color-primary)]"
-        />
-        <MarqueeRow
-          items={marqueeItems}
-          direction="left"
-          speed={35}
-          className="[&>div>span]:opacity-100 [&>div>span]:text-[var(--color-accent)] [&>div>span]:drop-shadow-[0_0_10px_var(--color-primary)]"
-        />
-        <MarqueeRow
-          items={marqueeItems}
-          direction="right"
-          speed={25}
-          className="[&>div>span]:opacity-100 [&>div>span]:text-[var(--color-accent)] [&>div>span]:drop-shadow-[0_0_10px_var(--color-primary)]"
-        />
-      </div>
+      {/* Decorative Robotic Border Elements */}
+      <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-primary/50 to-transparent" />
+      <div className="absolute bottom-0 left-0 w-full h-px bg-linear-to-r from-transparent via-primary/50 to-transparent" />
     </section>
   );
 };

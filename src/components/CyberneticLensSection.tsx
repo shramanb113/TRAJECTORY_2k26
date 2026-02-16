@@ -30,7 +30,7 @@ const CyberneticLensSection = () => {
         scrollTrigger: {
           trigger: triggerRef.current,
           start: "top top",
-          end: isMobile ? "+=1200%" : "+=1000%", // Even longer on mobile for full card reveal
+          end: isMobile ? "+=1800%" : "+=1000%", // Significantly longer on mobile for full card reveal
           scrub: 1,
           pin: true,
           onUpdate: (self: any) => {
@@ -59,7 +59,7 @@ const CyberneticLensSection = () => {
 
       // 3. Deep Vertical Scroll
       tl.to(contentRef.current, {
-        y: isMobile ? "-600vh" : "-220vh", // Deepest possible to ensure Phase 6 is seen
+        y: isMobile ? "-900vh" : "-220vh", // Even deeper to ensure all 6 cards are fully visible on small screens
         duration: 0.75, // Slightly longer duration for the deeper move
         ease: "none",
       }, 0.25);
