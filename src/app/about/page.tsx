@@ -42,14 +42,14 @@ const AbtPage = () => {
     },
   };
   return (
-    <div className="relative w-full flex flex-col justify-center items-center inset-0">
+    <div className="w-full flex flex-col justify-center items-center inset-0">
 
       {/* background */}
         <Image
         src="/robot-human-silhouettes.webp"
         alt="background"
         fill
-        className="object-contain opacity-20 blur-xs"
+        className="object-cover opacity-20 blur-xs"
         >
 
         </Image>
