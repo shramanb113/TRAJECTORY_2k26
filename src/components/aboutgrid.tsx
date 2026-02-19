@@ -41,7 +41,7 @@ function About() {
       description: "Use the calendar to filter your files by date.",
       href: "/",
       background: <img className="absolute -right-20 -top-20 opacity-60" />,
-      className: "lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2",
+      className: "lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2",
     },
     {
       Icon: BellIcon,
@@ -50,7 +50,7 @@ function About() {
         "Get notified when someone shares a file or mentions you in a comment.",
       href: "/",
       background: <img className="absolute -right-20 -top-20 opacity-60" />,
-      className: "lg:col-start-3 lg:col-end-3 lg:row-start-2 lg:row-end-4",
+      className: "lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-4",
     },
   ];
   return (

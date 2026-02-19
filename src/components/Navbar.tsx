@@ -60,12 +60,12 @@ const Navbar = () => {
           </Link>
         </motion.div>
         <motion.div variants={itemVariants}>
-          <button
-            onClick={()=>navigation.push("/about")}
+          <Link
+            href={"/about"}
             className="text-sm md:text-lg font-medium text-[var(--color-accent)] hover:text-[var(--color-primary)] transition-colors duration-300"
           >
             About
-          </button>
+          </Link>
         </motion.div>
         <motion.div variants={itemVariants}>
           <Link
