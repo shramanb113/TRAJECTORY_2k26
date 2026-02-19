@@ -1,10 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "motion/react";
 
 const Navbar = () => {
+
+  const navigation = useRouter();
+
   const navVariants = {
     hidden: { opacity: 0, y: -20 },
     visible: {
@@ -56,16 +60,16 @@ const Navbar = () => {
           </Link>
         </motion.div>
         <motion.div variants={itemVariants}>
-          <Link
-            href="#about"
+          <button
+            onClick={()=>navigation.push("/about")}
             className="text-sm md:text-lg font-medium text-[var(--color-accent)] hover:text-[var(--color-primary)] transition-colors duration-300"
           >
             About
-          </Link>
+          </button>
         </motion.div>
         <motion.div variants={itemVariants}>
           <Link
-            href="/login"
+            href="./src/app/login"
             className="px-4 md:px-6 py-1.5 md:py-2 text-sm md:text-lg font-bold text-[var(--color-vanta)] bg-[var(--color-primary)] rounded-full hover:bg-[var(--color-secondary)] hover:text-[var(--color-accent)] transition-all duration-300 shadow-[0_0_10px_var(--color-primary)] hover:shadow-[0_0_20px_var(--color-secondary)]"
           >
             Login
