@@ -16,6 +16,7 @@ const Grid = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleEnter = (card: HTMLDivElement) => {
+    if (!containerRef.current) return;
 
     const siblings = Array.from(containerRef.current!.children);
 
@@ -37,6 +38,7 @@ const Grid = ({
 
 
   const handleLeave = () => {
+    if (!containerRef.current) return;
 
     const cards = containerRef.current!.children;
 
@@ -85,7 +87,7 @@ const Card = ({
   name: string;
   className: string;
   background: ReactNode;
-  Icon: any;
+  Icon: React.ElementType;
   description: string;
   href: string;
   onHoverEntry?: (e: HTMLDivElement) => void;
