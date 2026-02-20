@@ -51,14 +51,14 @@ const CyberneticLensSection = () => {
   );
 
   return (
-    <section ref={containerRef} className="relative z-30 bg-black overflow-hidden border-t border-white/5 py-20 px-4">
+    <section ref={containerRef} className="relative z-30 bg-[#0B0F1A] overflow-hidden border-t border-white/5 py-20 px-4 text-accent">
       <div
         ref={triggerRef}
         className="w-full max-w-7xl mx-auto relative"
       >
         {/* Simple Technical Background */}
         <div className="absolute inset-0 pointer-events-none opacity-20 -z-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(230,81,0,0.05)_0%,transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,229,255,0.05)_0%,transparent_70%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
         </div>
 

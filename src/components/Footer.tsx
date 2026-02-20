@@ -5,10 +5,10 @@ import { Instagram, Linkedin, Facebook, ExternalLink } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="relative w-full py-20 bg-black border-t border-white/5 overflow-hidden">
+    <footer className="relative w-full py-20 bg-[#0B0F1A] border-t border-white/5 overflow-hidden">
       {/* Background HUD Elements */}
       <div className="absolute inset-0 pointer-events-none opacity-5">
-        <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(rgba(230,81,0,0.1)_1px,transparent_1px)] bg-[size:100%_40px]" />
+        <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(rgba(0,229,255,0.1)_1px,transparent_1px)] bg-[size:100%_40px]" />
         <div className="absolute top-0 right-10 w-px h-full bg-primary/20" />
         <div className="absolute top-0 left-10 w-px h-full bg-primary/20" />
       </div>
@@ -21,7 +21,7 @@ const Footer = () => {
             <Link 
               href="https://linktr.ee/trajectoryjumech?fbclid=PAZXh0bgNhZW0CMTEAAaajz1I4w0OH00Qw7UtFQyHtOTuEdyiokldRelhsoZ4jyZgJvdnJ57qURH4_aem_KOr5iI6NgY0WGz17PuGT3A"
               target="_blank"
-              className="group relative block w-full bg-[#0a0a0a] border border-primary/20 p-8 md:p-12 hover:border-primary/60 transition-all duration-700 hover:shadow-[0_0_50px_rgba(230,81,0,0.15)] overflow-hidden"
+              className="group relative block w-full bg-[#111827] border border-primary/20 p-8 md:p-12 hover:border-primary/60 transition-all duration-700 hover:shadow-[0_0_50px_rgba(0,229,255,0.15)] overflow-hidden"
             >
               {/* Scanline Animation */}
               <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-20 transition-opacity">
@@ -53,7 +53,7 @@ const Footer = () => {
               <Link 
                 href="https://www.instagram.com/trajectory_jumech/" 
                 target="_blank"
-                className="group relative p-4 border border-white/5 bg-[#050505] hover:border-primary/40 transition-all duration-500"
+                className="group relative p-4 border border-white/5 bg-[#0B0F1A] hover:border-primary/40 transition-all duration-500"
               >
                 <Instagram className="w-6 h-6 text-white/70 group-hover:text-primary transition-colors duration-300" />
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-primary/5 blur-sm" />
@@ -62,7 +62,7 @@ const Footer = () => {
               <Link 
                 href="https://www.linkedin.com/company/trajectoryjumech/" 
                 target="_blank"
-                className="group relative p-4 border border-white/5 bg-[#050505] hover:border-primary/40 transition-all duration-500"
+                className="group relative p-4 border border-white/5 bg-[#0B0F1A] hover:border-primary/40 transition-all duration-500"
               >
                 <Linkedin className="w-6 h-6 text-white/70 group-hover:text-primary transition-colors duration-300" />
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-primary/5 blur-sm" />
@@ -71,7 +71,7 @@ const Footer = () => {
               <Link 
                 href="https://www.facebook.com/profile.php?id=61572408332143" 
                 target="_blank"
-                className="group relative p-4 border border-white/5 bg-[#050505] hover:border-primary/40 transition-all duration-500"
+                className="group relative p-4 border border-white/5 bg-[#0B0F1A] hover:border-primary/40 transition-all duration-500"
               >
                 <Facebook className="w-6 h-6 text-white/70 group-hover:text-primary transition-colors duration-300" />
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-primary/5 blur-sm" />

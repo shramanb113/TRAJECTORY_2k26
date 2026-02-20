@@ -101,18 +101,18 @@ const Card = ({
     key={name}
     className={cn(
       "group relative col-span-3 flex flex-col justify-between overflow-hidden rounded-xl",
-      // light styles
-      "from-amber-600 to-amber-400 bg-linear-to-tr border-x-2 border-y-2 border-amber-900 shadow-[15px_15px_10px_rgba(255,165,0,0.2)] hover:from-amber-400 hover:to-amber-600 hover:bg-linear-to-tr ease-in-out duration-300 transform-gpu transition-all hover:shadow-[15px_15px_10px_rgba(255,165,0,0.7)]",
+      // theme styles
+      "from-[#0B0F1A] to-[#111827] bg-linear-to-tr border-x-2 border-y-2 border-primary/20 shadow-[15px_15px_20px_rgba(0,229,255,0.05)] hover:from-[#111827] hover:to-[#0B0F1A] hover:bg-linear-to-tr ease-in-out duration-300 transform-gpu transition-all hover:shadow-[15px_15px_30px_rgba(0,229,255,0.15)]",
       className,
     )}
   >
     <div >{background}</div>
     <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 transition-all duration-300 group-hover:-translate-y-3">
-      <Icon className="h-12 w-12 origin-left transform-gpu text-neutral-700 transition-all duration-300 ease-in-out group-hover:scale-75" />
-      <h3 className="text-xl font-semibold text-neutral-900">
+      <Icon className="h-12 w-12 origin-left transform-gpu text-primary group-hover:text-accent transition-all duration-300 ease-in-out group-hover:scale-75" />
+      <h3 className="text-xl font-bold text-white group-hover:text-primary transition-colors">
         {name}
       </h3>
-      <p className="max-w-lg text-neutral-900">{description}</p>
+      <p className="max-w-lg text-white/70 group-hover:text-white transition-colors">{description}</p>
     </div>
 
     <div

@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-black`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-[#0B0F1A]`}
       >
         <SmoothScroll>
           <MouseFlare />

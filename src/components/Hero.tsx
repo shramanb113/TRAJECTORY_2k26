@@ -33,8 +33,9 @@ const Hero = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/robot-human-silhouettes.webp"
+          src="/bg-new.webp"
           alt="Dystopian Hero Background"
+
           fill
           className="object-cover opacity-60"
           priority
@@ -52,7 +53,7 @@ const Hero = () => {
       >
         <motion.h1
           variants={itemVariants}
-          className="text-4xl md:text-8xl font-black tracking-tighter text-primary drop-shadow-[0_0_15px_rgba(230,81,0,0.5)] mb-4 glitch"
+          className="text-4xl md:text-8xl font-black tracking-tighter text-primary drop-shadow-[0_0_15px_rgba(0,229,255,0.5)] mb-4 glitch"
           data-text="TRAJECTORY"
         >
           TRAJECTORY <span className="text-accent">2K26</span>

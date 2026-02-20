@@ -38,7 +38,7 @@ const FeaturedEvents = () => {
       title: "Hardware Challenge", 
       category: "Innovation",
       desc: "Compete in designing innovative hardware solutions to real-world problems.",
-      color: "#ff4d00",
+      color: "#00E5FF",
       id: "HC-221",
       image: "/image2.webp"
     },
@@ -71,7 +71,7 @@ const FeaturedEvents = () => {
         {events.map((event, index) => (
           <div 
             key={index}
-            className="featured-card group relative h-[450px] md:h-[500px] bg-black border border-white/5 rounded-none overflow-hidden transition-[border-color,box-shadow] duration-500 hover:border-primary/50"
+            className="featured-card group relative h-[450px] md:h-[500px] bg-[#0B0F1A] border border-white/5 rounded-none overflow-hidden transition-[border-color,box-shadow] duration-500 hover:border-primary/50"
           >
             {/* Top Bar Decoration */}
             <div className="absolute top-0 left-0 w-full h-1 bg-white/5 group-hover:bg-primary/30" />
@@ -96,7 +96,7 @@ const FeaturedEvents = () => {
                  />
                  <div className="w-full h-full opacity-10" 
                    style={{ 
-                     backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(230,81,0,0.1) 1px, rgba(230,81,0,0.1) 2px)',
+                     backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0,229,255,0.1) 1px, rgba(0,229,255,0.1) 2px)',
                      backgroundSize: '100% 4px'
                    }}
                  />
@@ -130,9 +130,8 @@ const FeaturedEvents = () => {
                  </div>
               </div>
             </div>
- 
             {/* Info Section */}
-            <div className="p-6 md:p-10 flex flex-col h-3/5 md:h-1/2 justify-between relative bg-black">
+            <div className="p-6 md:p-10 flex flex-col h-3/5 md:h-1/2 justify-between relative bg-[#0B0F1A]">
               <div>
                 <div className="flex items-center gap-3 mb-3 md:mb-4">
                   <div className="w-8 md:w-10 h-[1px] bg-primary/40" />

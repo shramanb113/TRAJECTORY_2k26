@@ -97,12 +97,12 @@ const MarqueeRow = ({
 const MarqueeSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const rowColors = ["#FFD580", "#F5B041", "#FFD580", "#F5B041"];
+  const rowColors = ["#00E5FF", "#007CF0", "#00FFFF", "#00E5FF"];
 
   return (
     <section
       ref={containerRef}
-      className="relative w-full py-20 md:py-32 bg-black flex flex-col justify-center overflow-hidden"
+      className="relative w-full py-20 md:py-32 bg-[#0B0F1A] flex flex-col justify-center overflow-hidden"
     >
       {/* CRT Monitor Frame (Left/Right Borders) */}
       <div className="absolute left-0 top-0 w-1 md:w-2 h-full bg-primary/20 border-r border-primary/40 z-30" />
