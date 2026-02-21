@@ -72,14 +72,14 @@ const Hero = () => {
           className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center"
         >
           <Link
-            href="#explore"
+            href="/#explore"
             className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 text-lg md:text-xl font-bold text-vanta bg-primary rounded-none hover:bg-secondary hover:text-accent transition-all duration-300 shadow-[0_0_20px_var(--color-primary)] hover:shadow-[0_0_30px_var(--color-secondary)] uppercase tracking-wider clip-path-polygon"
           >
             Explore Events
           </Link>
           <Link
             href="/login"
-            className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 text-lg md:text-xl font-bold text-primary border-2 border-primary bg-transparent rounded-none hover:bg-primary hover:text-vanta transition-all duration-300 uppercase tracking-wider"
+            className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 text-lg md:text-xl font-bold text-primary border-2 border-primary bg-transparent rounded-none hover:bg-primary hover:text-vanta transition-all duration-300 shadow-[0_0_10px_var(--color-primary)/20] hover:shadow-[0_0_20px_var(--color-primary)] uppercase tracking-wider"
           >
             Join the Resistance
           </Link>

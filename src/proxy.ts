@@ -17,8 +17,7 @@ export default async function proxy(req: NextRequest) {
       { error: "Too many requests" },
       { status: 429 }
     );
-
-  }
+  }  
 
   return NextResponse.next();
 }

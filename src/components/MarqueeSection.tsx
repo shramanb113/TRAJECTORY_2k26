@@ -96,14 +96,21 @@ const MarqueeRow = ({
 
 const MarqueeSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isActive, setIsActive] = useState(false);
 
   const rowColors = ["#00E5FF", "#007CF0", "#00FFFF", "#00E5FF"];
 
   return (
     <section
       ref={containerRef}
-      className="relative w-full py-20 md:py-32 bg-[#0B0F1A] flex flex-col justify-center overflow-hidden"
+      className={`relative w-full py-20 md:py-32 bg-[#0B0F1A] flex flex-col justify-center overflow-hidden transition-colors duration-1000 ${isActive ? 'bg-[#0E1624]' : 'bg-[#0B0F1A]'}`}
     >
+      <motion.div
+        onViewportEnter={() => setIsActive(true)}
+        onViewportLeave={() => setIsActive(false)}
+        viewport={{ amount: 0.5 }}
+        className="absolute inset-0 pointer-events-none"
+      />
       {/* CRT Monitor Frame (Left/Right Borders) */}
       <div className="absolute left-0 top-0 w-1 md:w-2 h-full bg-primary/20 border-r border-primary/40 z-30" />
       <div className="absolute right-0 top-0 w-1 md:w-2 h-full bg-primary/20 border-l border-primary/40 z-30" />
@@ -126,24 +133,24 @@ const MarqueeSection = () => {
         <div className="absolute inset-0 bg-white/5 animate-[flicker_0.15s_infinite] opacity-[0.03]" />
       </div>
 
-      <div className="relative flex flex-col justify-center gap-4 md:gap-8 z-10">
-        <MarqueeRow items={marqueeItems} direction="left" speed={40} color={rowColors[0]} itemClassName="opacity-100" />
+      <div className={`relative flex flex-col justify-center gap-4 md:gap-8 z-10 transition-all duration-700 ${isActive ? 'scale-105 opacity-100' : 'scale-100 opacity-90'}`}>
+        <MarqueeRow items={marqueeItems} direction="left" speed={40} color={rowColors[0]} itemClassName={isActive ? "opacity-100" : "opacity-80"} />
         <MarqueeRow 
           items={marqueeItems} 
           direction="right" 
           speed={30} 
           className="scale-95" 
           color={rowColors[1]}
-          itemClassName="opacity-80"
+          itemClassName={isActive ? "opacity-100" : "opacity-60"}
         />
-        <MarqueeRow items={marqueeItems} direction="left" speed={35} color={rowColors[2]} itemClassName="opacity-100" />
+        <MarqueeRow items={marqueeItems} direction="left" speed={35} color={rowColors[2]} itemClassName={isActive ? "opacity-100" : "opacity-80"} />
         <MarqueeRow 
           items={marqueeItems} 
           direction="right" 
           speed={25} 
           className="scale-90"
           color={rowColors[3]}
-          itemClassName="opacity-80"
+          itemClassName={isActive ? "opacity-100" : "opacity-60"}
         />
       </div>
 

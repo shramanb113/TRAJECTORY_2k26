@@ -4,6 +4,10 @@ import React, { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Grid = ({
   children,
@@ -49,6 +53,23 @@ const Grid = ({
     });
 
   };
+
+  useGSAP(() => {
+    if (!containerRef.current) return;
+    const cards = Array.from(containerRef.current.children) as HTMLDivElement[];
+    
+    cards.forEach((card) => {
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top 60%",
+        end: "bottom 40%",
+        onEnter: () => handleEnter(card),
+        onLeave: () => handleLeave(),
+        onEnterBack: () => handleEnter(card),
+        onLeaveBack: () => handleLeave(),
+      });
+    });
+  }, { scope: containerRef });
 
   return (
 

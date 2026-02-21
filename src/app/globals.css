@@ -87,6 +87,11 @@
 body {
   background: var(--color-vanta);
   color: var(--color-accent);
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
 }
 
 /* Glitch Animation */

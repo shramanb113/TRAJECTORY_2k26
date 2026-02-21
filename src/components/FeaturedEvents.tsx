@@ -1,6 +1,25 @@
-"use client";
+import { useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const FeaturedEvents = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const cards = gsap.utils.toArray(".featured-card");
+    cards.forEach((card: any) => {
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top 60%",
+        end: "bottom 40%",
+        toggleClass: "is-active",
+      });
+    });
+  }, { scope: containerRef });
+
   const events = [
     { 
       title: "3D Design Battle", 
@@ -71,13 +90,13 @@ const FeaturedEvents = () => {
         {events.map((event, index) => (
           <div 
             key={index}
-            className="featured-card group relative h-[450px] md:h-[500px] bg-[#0B0F1A] border border-white/5 rounded-none overflow-hidden transition-[border-color,box-shadow] duration-500 hover:border-primary/50"
+            className="featured-card group relative h-[450px] md:h-[500px] bg-[#0B0F1A] border border-white/5 rounded-none overflow-hidden transition-[border-color,box-shadow] duration-500 hover:border-primary/50 group-[.is-active]:border-primary/50 group-[.is-active]:shadow-[0_0_40px_rgba(0,229,255,0.1)]"
           >
             {/* Top Bar Decoration */}
             <div className="absolute top-0 left-0 w-full h-1 bg-white/5 group-hover:bg-primary/30" />
             
             {/* Phase Big Number Overlay */}
-            <div className="absolute -right-4 -top-4 md:-right-8 md:-top-8 text-[8rem] md:text-[12rem] font-black text-white/[0.02] group-hover:text-primary/[0.04] transition-colors duration-700 select-none">
+            <div className="absolute -right-4 -top-4 md:-right-8 md:-top-8 text-[8rem] md:text-[12rem] font-black text-white/[0.02] group-hover:text-primary/[0.04] group-[.is-active]:text-primary/[0.04] transition-colors duration-700 select-none">
               {index + 1}
             </div>
 
@@ -86,7 +105,7 @@ const FeaturedEvents = () => {
                <img 
                  src={event.image} 
                  alt={event.title}
-                 className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 grayscale group-hover:grayscale-0"
+                 className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 group-[.is-active]:opacity-100 group-[.is-active]:scale-110 transition-all duration-1000 grayscale group-hover:grayscale-0 group-[.is-active]:grayscale-0"
                />
                
                {/* Technical Scanline Animation */}
@@ -103,7 +122,7 @@ const FeaturedEvents = () => {
                </div>
 
                <div 
-                className="absolute inset-0 opacity-10 group-hover:opacity-30 transition-opacity duration-1000" 
+                className="absolute inset-0 opacity-10 group-hover:opacity-30 group-[.is-active]:opacity-30 transition-opacity duration-1000" 
                 style={{ 
                   backgroundImage: `linear-gradient(${event.color}aa 1px, transparent 1px), linear-gradient(90deg, ${event.color}aa 1px, transparent 1px)`,
                   backgroundSize: '40px 40px'
@@ -114,8 +133,8 @@ const FeaturedEvents = () => {
               <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent opacity-80" />
 
               {/* Circular ID badge */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                 <div className="relative group-hover:scale-110 transition-transform duration-1000">
+               <div className="absolute inset-0 flex items-center justify-center">
+                 <div className="relative group-hover:scale-110 group-[.is-active]:scale-110 transition-transform duration-1000">
                     <div 
                       className="w-20 h-20 md:w-24 md:h-24 border border-white/10 flex items-center justify-center relative backdrop-blur-sm"
                       style={{ boxShadow: `inset 0 0 40px ${event.color}11` }}
@@ -139,10 +158,10 @@ const FeaturedEvents = () => {
                     {event.category}
                   </span>
                 </div>
-                <h3 className="text-xl md:text-3xl font-black text-white mb-4 md:mb-6 uppercase tracking-tight group-hover:translate-x-2 transition-transform duration-500">
+                <h3 className="text-xl md:text-3xl font-black text-white mb-4 md:mb-6 uppercase tracking-tight group-hover:translate-x-2 group-[.is-active]:translate-x-2 transition-transform duration-500">
                   {event.title}
                 </h3>
-                <p className="text-white text-xs md:text-sm leading-relaxed font-normal group-hover:text-primary transition-colors duration-500 line-clamp-3">
+                <p className="text-white text-xs md:text-sm leading-relaxed font-normal group-hover:text-primary group-[.is-active]:text-primary transition-colors duration-500 line-clamp-3">
                   {event.desc}
                 </p>
               </div>
