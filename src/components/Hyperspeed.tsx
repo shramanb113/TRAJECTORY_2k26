@@ -1004,12 +1004,13 @@ class App {
     this.setSize = this.setSize.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
+    this.onWindowResize = this.onWindowResize.bind(this);
 
     this.onTouchStart = this.onTouchStart.bind(this);
     this.onTouchEnd = this.onTouchEnd.bind(this);
     this.onContextMenu = this.onContextMenu.bind(this);
 
-    window.addEventListener('resize', this.onWindowResize.bind(this));
+    window.addEventListener('resize', this.onWindowResize);
   }
 
   onWindowResize() {
@@ -1180,7 +1181,7 @@ class App {
       this.scene.clear();
     }
 
-    window.removeEventListener('resize', this.onWindowResize.bind(this));
+    window.removeEventListener('resize', this.onWindowResize);
     if (this.container) {
       this.container.removeEventListener('mousedown', this.onMouseDown);
       this.container.removeEventListener('mouseup', this.onMouseUp);
@@ -1213,9 +1214,11 @@ class App {
 
 const DEFAULT_EFFECT_OPTIONS: Partial<HyperspeedOptions> = {};
 
-const Hyperspeed: FC<HyperspeedProps> = ({ effectOptions = DEFAULT_EFFECT_OPTIONS }) => {
+const Hyperspeed: FC<HyperspeedProps> = ({ effectOptions }) => {
   const hyperspeed = useRef<HTMLDivElement>(null);
   const appRef = useRef<App | null>(null);
+
+  const stableOptions = useRef(effectOptions);
 
   useEffect(() => {
     if (appRef.current) {
@@ -1231,7 +1234,7 @@ const Hyperspeed: FC<HyperspeedProps> = ({ effectOptions = DEFAULT_EFFECT_OPTION
     const container = hyperspeed.current;
     if (!container) return;
 
-    const options: HyperspeedOptions = { ...defaultOptions, ...effectOptions, colors: { ...defaultOptions.colors, ...effectOptions.colors } };
+    const options: HyperspeedOptions = { ...defaultOptions, ...stableOptions.current, colors: { ...defaultOptions.colors, ...(stableOptions.current?.colors ?? {}) } };
     if (typeof options.distortion === 'string') {
       options.distortion = distortions[options.distortion];
     }
